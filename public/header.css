@@ -54,7 +54,7 @@ body {
 }  
 .navbar-brand img{  
     height: 31px;  
-    width: auto;  
+    width: 31px;  
     display: block;  
  
     -webkit-transition : all 0.3s ease-out;  

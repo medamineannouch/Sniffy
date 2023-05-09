@@ -125,11 +125,11 @@
 <div class="row text-center text-xs-center text-sm-left text-md-left">  
 <div class="col-xs-12 col-sm-4 col-md-4">  
 <h5> Liens rapides </h5>  
-  <ul class="list-unstyled quick-links">  
-    <li> <a href="#"> <i class="fa fa-angle-double-right"> </i> Home </a> </li>   
-    <li> <a href="#"> <i class="fa fa-angle-double-right"> </i> FAQ </a> </li>  
-    <li> <a href="#"> <i class="fa fa-angle-double-right"> </i> Get Started </a> </li>  
-              <li> <a href="#"> <i class="fa fa-angle-double-right"> </i> Videos </a> </li>  
+<ul class="list-unstyled quick-links">  
+       <li> <a href="#"> <i class="fa fa-angle-double-right"> </i> Home </a> </li>   
+       <li> <a href="#"> <i class="fa fa-angle-double-right"> </i> FAQ </a> </li>  
+       <li> <a href="#"> <i class="fa fa-angle-double-right"> </i> Get Started </a> </li>  
+       <li> <a href="#"> <i class="fa fa-angle-double-right"> </i> Videos </a> </li>  
 </ul>  
 </div>  
           <div class="col-xs-12 col-sm-4 col-md-4">  
