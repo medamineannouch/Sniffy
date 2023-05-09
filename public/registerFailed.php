@@ -36,6 +36,11 @@
         <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=devanagari,latin-ext">
     </head>
 <body>
+    <?php 
+        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+            echo '<h5 class="alert alert-danger" style="text-align:center;"> email wrong format</h5>';
+        }
+    ?>
     <main>
     <form action="connectionDB.php" method="post">
         <h1>Sign Up</h1>

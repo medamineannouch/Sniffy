@@ -1,11 +1,4 @@
-<?php
-
-    // require_once __DIR__ . '/../src/boostrap.php';
-    // require_once __DIR__ . '/../src/register.php';
-
-    // view('header', ['title' => 'Register']);
-?>
-
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,51 +21,72 @@
        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
        <link rel = "stylesheet"href = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"  
               integrity = "sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"  crossorigin = "anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">    
-        <link rel="stylesheet" href="header.css">
-        <link rel="stylesheet" href="footer.css">
-        <link rel="stylesheet" href="register.css">
-        <title><?= $title ?? 'Home' ?></title>
-        <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=devanagari,latin-ext">
-    </head>
+              <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">    
+       <link rel="stylesheet" href="header.css">
+       <link rel="stylesheet" href="footer.css">
+       <link rel="stylesheet" href="register.css">
+<title><?= $title ?? 'Home' ?></title>
+</head>
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=devanagari,latin-ext');
 <body>
-    <main>
-    <form action="connectionDB.php" method="post">
-        <h1>Sign Up</h1>
+       <nav>
+              <div class="navigation-wrap bg-light start-header start-style">  
+                     <div class="container">  
+                     <div class="row">  
+                            <div class="col-12">  
+                            <nav class="navbar navbar-expand-md navbar-light">  
+                            <a class="navbar-brand" href="index.php" target="_blank"><img src="logo.jfif" alt="logo"></a>    
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">  
+                            <span class="navbar-toggler-icon"> </span>  
+                            </button>  
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">  
+                                   <ul class="navbar-nav ml-auto py-4 py-md-0">  
+                                   <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">  
+                                          <a class="nav-link dropdown-toggle"  href="index.php" role="button" aria-haspopup="true" aria-expanded="false"> Accueil </a>  
+                                   </li>  
+                                   
+                                   <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">  
+                                          <a class="nav-link dropdown-toggle"  href="index.php" role="button" aria-haspopup="true" aria-expanded="false"> Services </a>  
+                                   </li>  
+                                   <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">  
+                                          <a class="nav-link" href="#"> A-propos </a>  
+                                   </li>  
+                                   <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">  
+                                          <a class="nav-link" href="#"> Contacter-nous </a>  
+                                   </li>  
+                                   </ul>  
+                            </div>  
+                            </nav>  
+                            </div>  
+                     </div>  
+                     </div>  
+              </div> <br><br><br>
+       </nav>
+       <?php 
+          echo '<h5 class="alert alert-success" style="text-align:center;">succesfully registred </h5>';
+        ?>
+ <main>
+        <?php if (isset($errors['login'])) : ?>
+    <div class="alert alert-error">
+        <?= $errors['login'] ?>
+    </div>
+        <?php endif ?>
+    <form action="login.php" method="post">
+        <h1>Login</h1>
         <div>
             <label for="username">Username:</label>
-            <input type="text" name="username" id="username" value="<?= $inputs['username'] ?? '' ?>"
-                   class="<?php // error_class($errors, 'username') ?>">
+            <input type="text" name="username" id="username" value="<?= $inputs['username'] ?? '' ?>">
             <small><?= $errors['username'] ?? '' ?></small>
         </div>
         <div>
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" value="<?= $inputs['email'] ?? '' ?>"
-                   class="<?php // error_class($errors, 'email') ?>" >
-            <small><?= $errors['email'] ?? '' ?></small>
-        </div>
-        <div>
             <label for="password">Password:</label>
-            <input type="password" name="password" id="password"  value="<?= $inputs['password'] ?? '' ?>"
-                   class="<?php //error_class($errors, 'password') ?>">
+            <input type="password" name="password" id="password">
             <small><?= $errors['password'] ?? '' ?></small>
         </div>
-        <div>
-            <label for="password2">Password Again:</label>
-            <input type="password" name="password2" id="password2"  value="<?= $inputs['password2'] ?? '' ?>"
-                   class="<?php //error_class($errors, 'password2') ?>">
-            <small><?= $errors['password2'] ?? '' ?></small>
-        </div>
-        <div>
-            <label for="agree">
-                <input type="checkbox" name="agree" id="agree" value="checked" <?= $inputs['agree'] ?? '' ?>/> I agree
-                with the
-                <a href="#" title="term of services">term of services</a>
-            </label>
-            <small><?= $errors['agree'] ?? '' ?></small>
-        </div>
-        <button type="submit">Register</button>
-        <footer>Already a member? <a href="login.php">Login here</a></footer>
+        <section>
+            <button type="submit">Login</button>
+            <a href="register.php">Register</a>
+        </section>
     </form>
 </main>
 <footer>
