@@ -1,0 +1,135 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #8167a9;
+    background-image: linear-gradient(to top,#8167a9, #ffffff );
+    background-repeat: no-repeat;
+    font-family: sans-serif;
+}
+
+.status-bar{
+    position: relative;
+    background: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    margin: 0px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.status-bar-username{
+    display: inline-block;
+    margin: 0;
+}
+
+.status-bar-logout{
+    float: none;
+    display: inline-block;
+    outline: none;
+    text-decoration: none;
+    color: white;
+}
+
+.status-bar-logout:hover{
+    color: fb2525;
+}
+
+form{
+    margin: 0px 0px;
+}
+
+.monitor-form{
+    width: 400px;
+    background: rgb(255, 255, 255);
+    color: #000000;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 30px 30px;
+    border-radius: 10px;
+}
+
+h1{
+    margin: 0 0 10px;
+    padding: 0 0 0px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.flex-container{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.flex-container > div{
+    margin: 10px;
+    width: 120px;
+    height: 140px;
+}
+
+select{
+    outline: none;
+    width: 150px;
+    height: 25px;
+    font-size: 16px;
+    font: sans-serif;
+    margin: 0px 0px 0px 3px;
+}
+
+.monitor-form input[type = "number"]{
+    font-size: 16px;
+    margin: 0px 0px 0px 3px;
+    width: 150px;
+    height: 25px;
+}
+
+option{
+    outline: none;
+}
+
+select:hover{
+    cursor: pointer;
+}
+
+input{
+    outline: none;
+}
+
+.monitor-form input[type = "submit"]{
+    width: 100%;
+    border: none;
+    height: 40px;
+    background: #8167a9;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 10px;
+    position: relative;
+    margin-top: 10px;
+    padding: 0px 0px;
+}
+
+.monitor-form input[type = "submit"]:hover{
+    cursor: pointer;
+    background: #8167a9;
+    color: #fff;
+}
+
+/*footer{
+    background: rgb(0, 0, 0, 0.8);
+    color: white;
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+    top: 100%;
+    left: 50%;
+    position: fixed;
+    transform: translate(-50%, -150%);
+    border-radius: 10px;
+    padding: 10px;
+}*/
+
+p{
+    margin: 15px 0px;
+}
