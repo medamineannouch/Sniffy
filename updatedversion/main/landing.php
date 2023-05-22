@@ -26,7 +26,6 @@
        <link rel="stylesheet" href="style/register.css">
 <title><?= $title ?? 'Home' ?></title>
 </head>
-@import url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=devanagari,latin-ext');
 <body>
        <nav>
               <div class="navigation-wrap bg-light start-header start-style">  
@@ -34,7 +33,7 @@
                      <div class="row">  
                             <div class="col-12">  
                             <nav class="navbar navbar-expand-md navbar-light">  
-                            <a class="navbar-brand" href="index.php" target="_blank"><img src="logo.jfif" alt="logo"></a>    
+                            <a class="navbar-brand" href="index.php" target="_blank"><img src="imgs/logo.jfif" alt="logo"></a>    
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">  
                             <span class="navbar-toggler-icon"> </span>  
                             </button>  
@@ -57,6 +56,8 @@
                      </div>  
               </div> <br><br><br>
        </nav>
+       <br>
+       <br>
 <p><a href="logout.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Logout </a></p>
 
 
@@ -75,22 +76,30 @@
                 <div class=" row">
 
                     <div class="card w-50" >
-                        <img src="t11.jpg" class="card-img-top" alt="...">
+                        <br>
+                        <div style=" display: flex; justify-content: center;">
+                        <img src="imgs/t11.jpg" style="width: 500px; height: 150px;" class="card-img-top" alt="...">
+
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title">Packets tracking</h5>
                             <p class="card-text">Display Packets Statistics In Your Computer</p>
-                            <button href="packetsmonitoring/monitor.php"  role="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalSuivi" style="background-color: #8167a9">
-                                Track
-                            </button>
-                            <p><a href="packetsmonitoring/monitor.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Track2</a></p>
-                        </div>
+                            <a href="packetsmonitoring/monitor.php" role="button" class="btn btn-primary" style="background-color: #8167a9; border-color: #8167a9;">
+                            <button>Track</button>
+                            </a> 
+                         </div>
                     </div>
                     <div class="card w-50" >
-                        <img src="t22.png" class="card-img-top" alt="...">
+                    <br>
+                    <div style=" display: flex; justify-content: center;">
+                        <img src="imgs/t22.png" style="width: 500px; height: 150px;" class="card-img-top" alt="...">
+                    </div>
                         <div class="card-body">
                             <h5 class="card-title">Saved Packets</h5>
                             <p class="card-text">Display Your Saved Packets Statistics</p>
-                            <button href="paquetsEnregistres.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Display </button>
+                            <a href="packetsenrigistrée.php" role="button" class="btn btn-primary" style="background-color: #8167a9; border-color: #8167a9;">
+                            <button>Display</button>
+                            </a>
                         </div>
                     </div>
                     
