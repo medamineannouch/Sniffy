@@ -21,9 +21,9 @@
        <link rel = "stylesheet"href = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"  
               integrity = "sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"  crossorigin = "anonymous">
               <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">    
-       <link rel="stylesheet" href="style/header.css">
-       <link rel="stylesheet" href="style/footer.css">
-       <link rel="stylesheet" href="style/register.css">
+       <link rel="stylesheet" href="../style/header.css">
+       <link rel="stylesheet" href="../style/footer.css">
+       <link rel="stylesheet" href="../style/register.css">
 <title><?= $title ?? 'Home' ?></title>
 </head>
 <body>
@@ -33,7 +33,7 @@
                      <div class="row">  
                             <div class="col-12">  
                             <nav class="navbar navbar-expand-md navbar-light">  
-                            <a class="navbar-brand" href="index.php" target="_blank"><img src="imgs/logo.jfif" alt="logo"></a>    
+                            <a class="navbar-brand" href="index.php" target="_blank"><img src="../imgs/logo.jfif" alt="logo"></a>    
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">  
                             <span class="navbar-toggler-icon"> </span>  
                             </button>  
@@ -78,13 +78,13 @@
                     <div class="card w-50" >
                         <br>
                         <div style=" display: flex; justify-content: center;">
-                        <img src="imgs/t11.jpg" style="width: 500px; height: 150px;" class="card-img-top" alt="...">
+                        <img src="../imgs/t11.jpg" style="width: 500px; height: 150px;" class="card-img-top" alt="...">
 
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Packets tracking</h5>
                             <p class="card-text">Display Packets Statistics In Your Computer</p>
-                            <a href="packetsmonitoring/monitor.php" role="button" class="btn btn-primary" style="background-color: #8167a9; border-color: #8167a9;">
+                            <a href="../packetsmonitoring/monitor.php" role="button" class="btn btn-primary" style="background-color: #8167a9; border-color: #8167a9;">
                             <button>Track</button>
                             </a> 
                          </div>
@@ -92,12 +92,12 @@
                     <div class="card w-50" >
                     <br>
                     <div style=" display: flex; justify-content: center;">
-                        <img src="imgs/t22.png" style="width: 500px; height: 150px;" class="card-img-top" alt="...">
+                        <img src="../imgs/t22.png" style="width: 500px; height: 150px;" class="card-img-top" alt="...">
                     </div>
                         <div class="card-body">
                             <h5 class="card-title">Saved Packets</h5>
                             <p class="card-text">Display Your Saved Packets Statistics</p>
-                            <a href="packetsenrigistrée.php" role="button" class="btn btn-primary" style="background-color: #8167a9; border-color: #8167a9;">
+                            <a href="../packetsenrigistrée.php" role="button" class="btn btn-primary" style="background-color: #8167a9; border-color: #8167a9;">
                             <button>Display</button>
                             </a>
                         </div>

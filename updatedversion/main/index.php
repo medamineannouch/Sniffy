@@ -21,9 +21,9 @@
        <link rel = "stylesheet"href = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"  
               integrity = "sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"  crossorigin = "anonymous">
               <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">    
-       <link rel="stylesheet" href="style/header.css">
-       <link rel="stylesheet" href="style/footer.css">
-       <link rel="stylesheet" href="style/register.css">
+       <link rel="stylesheet" href="../style/header.css">
+       <link rel="stylesheet" href="../style/footer.css">
+       <link rel="stylesheet" href="../style/register.css">
 <title><?= $title ?? 'Home' ?></title>
 </head>
 <body>
@@ -33,7 +33,7 @@
                             <div class="row">  
                                    <div class="col-12">  
                                           <nav class="navbar navbar-expand-md navbar-light">  
-                                                 <a class="navbar-brand" href="index.php" target="_self" ><img src="imgs/logo_ensamr.jpeg" alt="logo"></a>    
+                                                 <a class="navbar-brand" href="index.php" target="_self" ><img src="../imgs/logo_ensamr.jpeg" alt="logo"></a>    
                                                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">  
                                                  <span class="navbar-toggler-icon"> </span>  
                                                  </button>  
@@ -76,8 +76,8 @@
                             </div>  
                      </div> 
                      <div class="containe">
-                            <a href="login/login.html" class="btn btn-info" role="button">Se Connecter</a> 
-                            <a href="login/register.php" class="btn btn-info" role="button">Creer compte</a>
+                            <a href="../login/login.html" class="btn btn-info" role="button">Se Connecter</a> 
+                            <a href="../login/register.php" class="btn btn-info" role="button">Creer compte</a>
                      </div> 
               </div> 
        </div>  
