@@ -30,7 +30,10 @@
     </head>
 <body>
     <main>
-    <form action="register.php" method="post">
+              <!--
+              charaf !!!!
+              -->
+    <form action="backregister.php" method="post">
         <h1>Sign Up</h1>
         <div>
             <label for="username">Username:</label>
