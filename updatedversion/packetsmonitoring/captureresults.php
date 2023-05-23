@@ -409,6 +409,14 @@
                         }
                     }
                 ?>
+                <div>
+                    <!--to do
+                    waaaaaaaaaaaaaa 
+                    charaf 
+                    -->
+                    <p><a href="savepackets.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Save </a></p>
+
+                </div>
             <p><u>Note</u>:- Unsupported packets have been dropped</p>
         </div>
         </main>
