@@ -1,10 +1,12 @@
 <?php
-    session_start();
+    session_start(); //Started at login/login/login.php
     if(empty($_SESSION['logged_in']) || !$_SESSION['logged_in']){
         $_SESSION['login_failed'] = false;
-        header('Location: ../login/loginpage.html');
+        header('Location: ../login/login.php');
         exit();
     }
+    //* this array contains the data to save it when pressing in 'save' button
+    $CSVRAW = array();
 ?>
 
 <html>
@@ -42,14 +44,16 @@
                             <div class="row">  
                                    <div class="col-12">  
                                           <nav class="navbar navbar-expand-md navbar-light">  
-                                                 <a class="navbar-brand" href="index.php" target="_self" ><img src="../imgs/logo.jfif" alt="logo"></a>    
+                                                 <a class="navbar-brand" href="index.php" target="_self" >
+                                                    <img src="../imgs/logo_ensamr.jpeg" alt="logo">
+                                                </a>    
                                                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">  
                                                  <span class="navbar-toggler-icon"> </span>  
                                                  </button>  
                                                  <div class="collapse navbar-collapse" id="navbarSupportedContent">  
                                                         <ul class="navbar-nav ml-auto py-4 py-md-0">  
                                                         <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">  
-                                                               <a class="nav-link dropdown-toggle"  href="index.php" role="button" aria-haspopup="true" aria-expanded="false"> Home </a>  
+                                                               <a class="nav-link dropdown-toggle"  href="../main/index.php" role="button" aria-haspopup="true" aria-expanded="false"> Home </a>  
                                                         </li>  
                                                         <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">  
                                                                <a class="nav-link" href="#"> About-us</a>  
@@ -82,13 +86,13 @@
                     $filter = $_POST['filter'];
                     $packetCount = $_POST['packetCount'];
                    
-                    $pcapFile = 'C:\xampp\htdocs\project\Sniffy\V3\packetsmonitoring\output.pcap';
+                    $pcapFile = 'C:\wamp64\www\Sniffy\updatedversion\packetsmonitoring\output.pcap';
 
                     // Check if running on Windows
                     if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') 
                     {
                         if($filter == "all")
-                            echo "<table style = 'width: 100%;'>";
+                            echo "<table class='table-hover' style = 'width: 100%;'>";
                         else
                             echo "<table>";
                         
@@ -121,7 +125,7 @@
                     
                         echo "</tr>";
                         // Use the Windows version of tcpdump, which is WinDump
-                        $tcpdump = 'C:\xampp\htdocs\project\Sniffy\V3\packetsmonitoring\windump.exe';
+                        $tcpdump = 'C:\wamp64\www\Sniffy\updatedversion\packetsmonitoring\windump.exe'; //Updated the path to adapt with WampServer
                         
 
                         //Add packet count
@@ -214,7 +218,9 @@
                                 echo "<td>".$packetLength."\n</td>";
                             }
                             
-                            echo "</tr>";   
+                            echo "</tr>";  
+                            //! if the save buttion is pressed || TODO fix the Timestamp from the PcapFile
+                            array_push($CSVRAW,$_SESSION['username'],date("Y-m-d H:i:s"),$sourceIP,$sourcePort,$destinationIP,$destinationPort,$sourceMAC,$destinationMAC,$packetLength); 
                         }
 
                         // Close the PCAP file
@@ -414,7 +420,14 @@
                     waaaaaaaaaaaaaa 
                     charaf 
                     -->
-                    <p><a href="savepackets.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Save </a></p>
+                    <!-- //? that will be Painful bruh but Here we Gooooooooooo! -->
+                    <p>
+                        <?php $_SESSION['$CSVRAW'] = $CSVRAW ; ?> 
+                        <a href="importmode.php" target="_blank" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Save </a>
+                    
+                        
+                        <a href="monitor.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Retry </a>
+                    </p>
 
                 </div>
             <p><u>Note</u>:- Unsupported packets have been dropped</p>
@@ -447,7 +460,7 @@
           
     <div class="row">  
     <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">  
-    <p class="h6">2023 ©  Travail réalisé par : INDIA-Groupe-4 </p>  
+    <p class="h6"><?php echo date('Y'); ?> &copy;  Travail réalisé par : INDIA-Groupe-4 </p>  
     </div>  
     <hr>  
     </div>      

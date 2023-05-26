@@ -1,12 +1,12 @@
 <?php
 
-  session_start();
-  //Check if session already exists i.e. if user is already logged in
-if(empty($_SESSION['logged_in']) || (!empty($_SESSION['logged_in']) && !$_SESSION['logged_in'])){
-        $_SESSION['login_failed'] = false;
-        header('Location: ../login/login.html');
-        exit();//Stop executing rest script
-    }
+       session_start();
+       //Check if session already exists i.e. if user is already logged in
+       if(empty($_SESSION['logged_in']) || (!empty($_SESSION['logged_in']) && !$_SESSION['logged_in'])){
+       $_SESSION['login_failed'] = true;
+       header('Location: ../login/login.php');
+       exit();//Stop executing rest script
+       }
 
     ?> 
 
@@ -47,7 +47,7 @@ if(empty($_SESSION['logged_in']) || (!empty($_SESSION['logged_in']) && !$_SESSIO
                                                  <div class="collapse navbar-collapse" id="navbarSupportedContent">  
                                                         <ul class="navbar-nav ml-auto py-4 py-md-0">  
                                                         <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">  
-                                                               <a class="nav-link dropdown-toggle"  href="index.php" role="button" aria-haspopup="true" aria-expanded="false"> Home </a>  
+                                                               <a class="nav-link dropdown-toggle"  href="../main/index.php" role="button" aria-haspopup="true" aria-expanded="false"> Home </a>  
                                                         </li>  
                                                         <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">  
                                                                <a class="nav-link" href="#"> About-us</a>  
@@ -77,10 +77,9 @@ if(empty($_SESSION['logged_in']) || (!empty($_SESSION['logged_in']) && !$_SESSIO
             
                     <div>
                     <p style="font-size: larger; /* Increase the font size */
-  text-decoration: underline; ">Protocols</p><br><br>
+                            text-decoration: underline; ">Protocols</p><br><br>
 
-                        <div style="display: flex;
-    justify-content: center; align-items: center;">
+                        <div style="display: flex;justify-content: center; align-items: center;">
                             <div >
                             <input type = "radio" name = "protocol" value = "tcp" checked>TCP<br><br>
                             <input type = "radio" name = "protocol" value = "udp">UDP<br><br>
@@ -140,7 +139,7 @@ if(empty($_SESSION['logged_in']) || (!empty($_SESSION['logged_in']) && !$_SESSIO
           
     <div class="row">  
     <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">  
-    <p class="h6">2023 ©  Travail réalisé par : INDIA-Groupe-4 </p>  
+    <p class="h6"><?php echo date('Y'); ?> &copy;  Travail réalisé par : INDIA-Groupe-4 </p>  
     </div>  
     <hr>  
     </div>      

@@ -1,4 +1,6 @@
-
+<?php
+       session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,29 +35,87 @@
               <!--
               charaf !!!!
               -->
-    <form action="backregister.php" method="post">
+              <!-- //*Sure bro I got yout back ;) -->
+              <?php 
+                     $checkval = null;
+                     $checkError = null;
+                     $pswdError = null;
+                     $mailError = null;
+                     $username = null;
+                     $email = null;
+                     $password = null;
+                     //* processing the data posted by the form
+                     if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                            $username = $_POST['username'];
+                            $email = $_POST['mail'];
+                            $password = $_POST['password'];
+                            if(empty($_POST['agree'])){
+                                   $checkError = "* This option is required !" ;          
+                            } 
+                            //* check email format (Regular Expression)
+                            elseif(!preg_match("/^([a-zA-Z0-9]{1,})@(gmail|email|hotmail|outlook|um5)\.[a-zA-z]{2,}/",$email)){
+                                   $mailError = "Invalid mail format !";
+                                   //* after posting the check input will be checked if the page is not redirected to login.php    
+                                   $checkval = "checked"; 
+                            }
+                            
+                            //* check the second password
+                            elseif($password !== $_POST['password2']){
+                                   $pswdError = "The password doesn't match the first one!";
+                                   //* after posting the check input will be checked if the page is not redirected to login.php    
+                                   $checkval = "checked"; 
+                            }
+                            else{ 
+                                                                       
+                                   
+                                   //* Connect to Database "sniffy"
+                                   $dbHost = "localhost";
+                                   $dbUser = "root";
+                                   $dbPass = "";
+                                   $dbName = "sniffy";
+                                   $dbPort = 3306;
+                                   
+                                   $conn = new  PDO("mysql:host=$dbHost;dbname=$dbName;port=$dbPort",$dbUser,$dbPass);
+                                   
+                                   //* insert user in the table 'users'
+                                   $query = ('INSERT INTO users(username,password,email) VALUES(?,?,?)');
+                                   $request = $conn->prepare($query);
+                                   $request->execute(array($username,$password,$email));
+                                   
+                                   //* reairect to login.php with filled fields 
+                                   $_SESSION['registered'] = true;
+                                   header('location:login.php');
+                            }
+                     }
+                     
+              ?>
+    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post"> <!--   //* "htmlspecialchars($_SERVER['PHP_SELF'])":eviter les attacks XSS (cross site scripting)-->
         <h1>Sign Up</h1>
         <div>
             <label for="username">Username:</label>
-            <input type = "username" name = "username" placeholder="Enter username" required />
+            <input type = "username" name = "username" placeholder="Enter username" value="<?php echo $username; ?>" required />
         </div>
         <div>
             <label for="email">Email:</label>
-            <input type = "mail" name = "mail" placeholder="Enter your mail" required />
+            <input type = "mail" name = "mail" placeholder="Enter your mail" value="<?php echo $email; ?>" required />
+            <span class="text-danger"> <?php echo $mailError ;?> </span>
         </div>
         <div>
             <label for="password">Password:</label>
-            <input type = "password" name = "password" placeholder="Enter a password" required />
+            <input type = "password" name = "password" placeholder="Enter a password" value="<?php echo $password; ?>" required />
         </div>
         <div>
             <label for="password2">Password Again:</label>
-            <input type = "password" name = "password2" placeholder="Enter again the password" required />
+            <input type = "password" name = "password2" placeholder="Enter again the password" " required />
+            <span class="text-danger"> <?php echo $pswdError ;?> </span>
         </div>
         <div>
             <label for="agree">
-                <input type="checkbox" name="agree" id="agree" value="checked" <?= $inputs['agree'] ?? '' ?>/> I agree
+                <input type="checkbox" name="agree" id="agree" value="agree" <?php echo $checkval; ?> /> I agree
                 with the
                 <a href="#" title="term of services">term of services</a>
+                <!-- //! show the Error if it is triggered  -->
+                <span class="text-danger"> <?php echo $checkError ;?> </span>
             </label>
             <small><?= $errors['agree'] ?? '' ?></small>
         </div>
@@ -91,7 +151,7 @@
     
               <div class="row">  
                      <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">  
-                            <p class="h6">2023 ©  Travail réalisé par : INDIA-Groupe-4 </p>  
+                            <p class="h6"><?php echo date('Y')?> &copy;  Travail réalisé par : INDIA-Groupe-4 </p>  
                      </div>  
               </div>   
        </section>  

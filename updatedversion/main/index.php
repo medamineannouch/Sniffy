@@ -72,11 +72,11 @@
                                                         </h1> 
                                           </div>    
                                    </div>  
-                                   <img src="imgs/mtp2.png" class="imgs" width="300" height="172"> 
+                                   <img src="../imgs/mtp2.png" class="imgs" width="300" height="172"> 
                             </div>  
                      </div> 
                      <div class="containe">
-                            <a href="../login/login.html" class="btn btn-info" role="button">Se Connecter</a> 
+                            <a href="../login/login.php" class="btn btn-info" role="button">Se Connecter</a> 
                             <a href="../login/register.php" class="btn btn-info" role="button">Creer compte</a>
                      </div> 
               </div> 

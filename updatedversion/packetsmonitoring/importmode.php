@@ -1,6 +1,15 @@
 <?php
     session_start();
-    
+    //* triggered when import process is done
+    $importmsg = null;
+    if($_SERVER['REQUEST_METHOD'] == 'GET'){
+        if(!empty($_SESSION['imported']) && $_SESSION['imported']==="csv"){
+            $importmsg = "CSV file successfuly imported !";
+        }elseif(!empty($_SESSION['imported']) && $_SESSION['imported']==="sql"){
+            $importmsg = "Data successfully imported to DataBase";
+        }
+    }
+    $_SESSION['imported'] = null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +55,7 @@
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">  
                                    <ul class="navbar-nav ml-auto py-4 py-md-0">  
                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">  
-                                          <a class="nav-link dropdown-toggle"  href="index.php" role="button" aria-haspopup="true" aria-expanded="false"> Home </a>  
+                                          <a class="nav-link dropdown-toggle"  href="../main/index.php" role="button" aria-haspopup="true" aria-expanded="false"> Home </a>  
                                    </li>  
                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">  
                                                                <a class="nav-link" href="#"> About-us  </a>  
@@ -64,47 +73,48 @@
        </nav>
        <br>
        <br>
-<p><a href="../login/logout.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Logout </a></p>
-
-
-
-
+       <?php
+              // var_dump($extractedPassword['password']);
+              if(!empty($importmsg)){
+                     echo '<div class="alert alert-success" style="text-align:center;">' .$importmsg . '</div>' ;
+              }      
+        ?>
+        <p><a href="../login/logout.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Logout </a></p>
+    
         <div class="container">
-            
             <div class="row style ">
                 <div class="row">
                     <p class="text-center fs-2 text-secondary  mt-3 mb-3  w-100">
-                        Welcome <?php echo $_SESSION['username']?>
+                        Save Mode
                     </p>
                 </div>
-
 
                 <div class=" row">
 
                     <div class="card w-50" >
                         <br>
                         <div style=" display: flex; justify-content: center;">
-                        <img src="../imgs/t11.jpg" style="width: 500px; height: 150px;" class="card-img-top" alt="...">
+                        <img src="../imgs/file.png" style="width: 500px; height: 150px;" class="card-img-top" alt="...">
 
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Packets tracking</h5>
-                            <p class="card-text">Display Packets Statistics In Your Computer</p>
-                            <a href="../packetsmonitoring/monitor.php" role="button" class="btn btn-primary" style="background-color: #8167a9; border-color: #8167a9;">
-                            <button>Track</button>
+                            <h5 class="card-title">CSV file</h5>
+                            <p class="card-text">Import Data in CSV file format</p>
+                            <a href="csvsavepackets.php" role="button" class="btn btn-primary" style="background-color: #8167a9; border-color: #8167a9;">
+                            <button>Import</button>
                             </a> 
                          </div>
                     </div>
                     <div class="card w-50" >
                     <br>
                     <div style=" display: flex; justify-content: center;">
-                        <img src="../imgs/t22.png" style="width: 500px; height: 150px;" class="card-img-top" alt="...">
+                        <img src="../imgs/sql.png" style="width: 500px; height: 150px;" class="card-img-top" alt="...">
                     </div>
                         <div class="card-body">
-                            <h5 class="card-title">Saved Packets</h5>
-                            <p class="card-text">Display Your Saved Packets Statistics</p>
-                            <a href="../packetsmonitoring/savedpackets.php" role="button" class="btn btn-primary" style="background-color: #8167a9; border-color: #8167a9;">
-                            <button>Display</button>
+                            <h5 class="card-title">Database</h5>
+                            <p class="card-text">Import Data to the Database</p>
+                            <a href="sqlsavepackets.php" role="button" class="btn btn-primary" style="background-color: #8167a9; border-color: #8167a9;">
+                            <button>Import</button>
                             </a>
                         </div>
                     </div>
@@ -148,7 +158,7 @@
        
     <div class="row">  
     <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">  
-    <p class="h6">2023 ©  Travail réalisé par : INDIA-Groupe-4 </p>  
+    <p class="h6"><?php echo date('Y'); ?> &copy;  Travail réalisé par : INDIA-Groupe-4 </p>  
     </div>  
     <hr>  
     </div>      
@@ -157,4 +167,3 @@
 </footer>
 </body>
 </html>
-          
