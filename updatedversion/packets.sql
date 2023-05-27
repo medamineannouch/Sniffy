@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `packets` (
   `username` varchar(20) NOT NULL,
+  'Protocol' varchar(5) NOT NULL,
   `Timestamp` varchar(100) NOT NULL,
   `Source IPv4` varchar(100) NOT NULL,
   `Source Port` varchar(100) NOT NULL,
