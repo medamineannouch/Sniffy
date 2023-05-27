@@ -1,14 +1,19 @@
 <?php
     session_start();
-    $target_file = fopen("saves/" . $_SESSION['username']. date('d-m-y').'.csv', 'a+');
-    for($i=0;$i<count($_SESSION['$CSVRAW']);$i++){
-        if(($i+1)%9 == 0){
-            fwrite($target_file,'"'.$_SESSION['$CSVRAW'][$i]."\"\n");
-        }else{
-            fwrite($target_file,'"'.$_SESSION['$CSVRAW'][$i].'",');
+    $csvContent = '';
+
+    for ($i = 0; $i < count($_SESSION['$CSVRAW']); $i++) {
+        if (($i + 1) % 9 == 0) {
+            $csvContent .= '"' . $_SESSION['$CSVRAW'][$i] . "\"\n";
+        } else {
+            $csvContent .= '"' . $_SESSION['$CSVRAW'][$i] . '",';
         }
     }
-    fclose($target_file);
-    $_SESSION['imported'] = "csv";
-    header('location:importmode.php');
+    header('Content-Type: text/csv');
+    header('Content-Disposition: attachment; filename="captured_packets.csv"');
+    header('Content-Length: ' . strlen($csvContent));
+
+    // Write file content to the output stream
+    echo $csvContent;
+    exit;
 ?>
