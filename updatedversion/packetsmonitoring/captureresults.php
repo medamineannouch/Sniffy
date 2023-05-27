@@ -79,15 +79,17 @@
         </div>
         <?php
             $protocol = $_POST['protocol'];
-            echo "<h2 style="."border: 5px solid #8167a9; border-radius: 10px; padding: 3px; ".">" . strtoupper($protocol) . " packets</h2>";
+           // echo "<h2 style="."border: 5px solid #8167a9; border-radius: 10px; padding: 3px; ".">" . strtoupper($protocol) . " packets</h2>";
         ?>
         <div class = "content-box">
                 <?php
                     $filter = $_POST['filter'];
                     $packetCount = $_POST['packetCount'];
                    
-                    $pcapFile = 'C:\wamp64\www\Sniffy\updatedversion\packetsmonitoring\output.pcap';
+                   // $pcapFile = 'C:\wamp64\www\Sniffy\updatedversion\packetsmonitoring\output.pcap'; //charaf
+                   $pcapFile = 'C:\xampp\htdocs\project\Sniffy\V3\packetsmonitoring\output.pcap'; //medamine
 
+                    
                     // Check if running on Windows
                     if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') 
                     {
@@ -98,6 +100,8 @@
                         
                         //Table header
                         echo "<tr>";
+                        echo "<th>Protocol</th>";
+
                         if($filter == "timestamp" || $filter == "all"){
                             echo "<th>Timestamp</th>";
                         }
@@ -124,8 +128,13 @@
                         }
                     
                         echo "</tr>";
+
+
                         // Use the Windows version of tcpdump, which is WinDump
-                        $tcpdump = 'C:\wamp64\www\Sniffy\updatedversion\packetsmonitoring\windump.exe'; //Updated the path to adapt with WampServer
+                        $tcpdump = 'C:\xampp\htdocs\project\Sniffy\V3\packetsmonitoring\windump.exe'; //medamine
+
+           //charaf
+                       // $tcpdump = 'C:\wamp64\www\Sniffy\updatedversion\packetsmonitoring\windump.exe'; //Updated the path to adapt with WampServer
                         
 
                         //Add packet count
@@ -187,12 +196,13 @@
                             $destinationMAC = bin2hex(substr($packetData, 0, 6));
                             $packetLength = $capturedLength;
 
-                            $dateString = date("Y-m-d H:i:s", strtotime($timestamp));
+                            $dateString = date("Y-m-d H:i:s", $timestamp);
                             $chunks1 = str_split($destinationMAC, 2);
                             $destinationMAC = implode(":", $chunks1);
                             $chunks2 = str_split($sourceMAC, 2);
                             $sourceMAC = implode(":", $chunks2);
                             echo "<tr>";
+                            echo "<td>".$protocol."\n</td>";
                             if($filter == "timestamp" || $filter == "all"){
                                 echo "<td>".$dateString."\n</td>";
                             }
@@ -220,7 +230,8 @@
                             
                             echo "</tr>";  
                             //! if the save buttion is pressed || TODO fix the Timestamp from the PcapFile
-                            array_push($CSVRAW,$_SESSION['username'],date("Y-m-d H:i:s"),$sourceIP,$sourcePort,$destinationIP,$destinationPort,$sourceMAC,$destinationMAC,$packetLength); 
+                            //timestamp is fixed !!
+                            array_push($CSVRAW,$_SESSION['username'],$protocol,$dateString,$sourceIP,$sourcePort,$destinationIP,$destinationPort,$sourceMAC,$destinationMAC,$packetLength); 
                         }
 
                         // Close the PCAP file
@@ -243,6 +254,8 @@
                             
                             //Table header
                             echo "<tr>";
+                            echo "<th>Protocol</th>";
+
                             if($filter == "timestamp" || $filter == "all"){
                                 echo "<th>Timestamp</th>";
                             }
@@ -292,6 +305,8 @@
                                 for($i = 0; $i < sizeof($timestamp); $i += 1)
                                 {
                                     echo "<tr>";
+                                    echo "<td>".$protocol."\n</td>";
+
                                     if($filter == "timestamp" || $filter == "all"){
                                         echo "<td>".$timestamp[$i]."\n</td>";
                                     }
@@ -337,6 +352,8 @@
                                 for($i = 0; $i < sizeof($timestamp); $i += 1)
                                 {
                                     echo "<tr>";
+                                    echo "<td>".$protocol."\n</td>";
+
                                     if($filter == "timestamp" || $filter == "all"){
                                         echo "<td>".$timestamp[$i]."\n</td>";
                                     }
@@ -383,6 +400,8 @@
                             for($i = 0; $i < sizeof($timestamp); $i += 1)
                             {
                                 echo "<tr>";
+                                echo "<td>".$protocol."\n</td>";
+
                                 if($filter == "timestamp" || $filter == "all"){
                                     echo "<td>".$timestamp[$i]."\n</td>";
                                 }
@@ -415,18 +434,22 @@
                         }
                     }
                 ?>
+
                 <div>
-                    <!--to do
+                    <!--
+                    to do
                     waaaaaaaaaaaaaa 
                     charaf 
                     -->
                     <!-- //? that will be Painful bruh but Here we Gooooooooooo! -->
+                    <!--indeed it iiis-->
                     <p>
                         <?php $_SESSION['$CSVRAW'] = $CSVRAW ; ?> 
                         <a href="importmode.php" target="_blank" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Save </a>
                     
-                        
-                        <a href="monitor.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Retry </a>
+                        <!--I have modified the "retry" so it repeats the process whith the same config -->
+
+                        <a href="capturepackets.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Retry </a>
                     </p>
 
                 </div>
@@ -444,8 +467,7 @@
     <li> <a href="#"> <i class="fa fa-angle-double-right"> </i> FAQ </a> </li>  
 </ul>  
 </div>  
-          <div class="col-xs-12 col-sm-4 col-md-4">  
-    
+          <div class="col-xs-12 col-sm-4 col-md-4">      
     </div>  
     <div class="col-xs-12 col-sm-4 col-md-4">  
     <h5> à propos </h5>  
@@ -456,8 +478,7 @@
     <li> <a href="#"> <i class="fa fa-angle-double-right"> </i> Contact </a> </li>  
     </ul>  
     </div>  
-    </div>  
-          
+    </div>          
     <div class="row">  
     <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">  
     <p class="h6"><?php echo date('Y'); ?> &copy;  Travail réalisé par : INDIA-Groupe-4 </p>  
