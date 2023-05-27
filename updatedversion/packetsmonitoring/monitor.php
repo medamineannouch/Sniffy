@@ -40,7 +40,7 @@
                             <div class="row">  
                                    <div class="col-12">  
                                           <nav class="navbar navbar-expand-md navbar-light">  
-                                                 <a class="navbar-brand" href="index.php" target="_self" ><img src="../imgs/logo.jfif" alt="logo"></a>    
+                                                 <a class="navbar-brand" href="../main/index.php" target="_self" ><img src="../imgs/logo.jfif" alt="logo"></a>    
                                                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">  
                                                  <span class="navbar-toggler-icon"> </span>  
                                                  </button>  
@@ -68,7 +68,7 @@
             <p class = "status-bar-username">
                 <?php echo "Logged in as <u>".$_SESSION['username']."</u>"; ?>
             </p>
-            <p><a href="logout.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Logout </a></p>
+            <p><a href="../login/logout.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Logout </a></p>
         </div>
         
         <form action = "captureresults.php" method = "POST" style=" border: 5px solid #8167a9; border-radius: 10px; box-shadow: 4px 4px 4px #8167a9; ">
