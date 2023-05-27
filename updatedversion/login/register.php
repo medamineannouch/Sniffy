@@ -78,9 +78,9 @@
                                    $conn = new  PDO("mysql:host=$dbHost;dbname=$dbName;port=$dbPort",$dbUser,$dbPass);
                                    
                                    //* insert user in the table 'users'
-                                   $query = ('INSERT INTO users(username,password,email) VALUES(?,?,?)');
+                                   $query = ('INSERT INTO users(username,password) VALUES(?,?)');
                                    $request = $conn->prepare($query);
-                                   $request->execute(array($username,$password,$email));
+                                   $request->execute(array($username,$password));
                                    
                                    //* reairect to login.php with filled fields 
                                    $_SESSION['registered'] = true;
