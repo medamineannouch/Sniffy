@@ -99,9 +99,9 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">CSV file</h5>
-                            <p class="card-text">Import Data in CSV file format</p>
+                            <p class="card-text">Export Data in CSV file format</p>
                             <a href="csvsavepackets.php" role="button" class="btn btn-primary" style="background-color: #8167a9; border-color: #8167a9;">
-                            <button>Import</button>
+                            <button>Export</button>
                             </a> 
                          </div>
                     </div>
@@ -112,9 +112,9 @@
                     </div>
                         <div class="card-body">
                             <h5 class="card-title">Database</h5>
-                            <p class="card-text">Import Data to the Database</p>
+                            <p class="card-text">Export Data to the Database</p>
                             <a href="sqlsavepackets.php" role="button" class="btn btn-primary" style="background-color: #8167a9; border-color: #8167a9;">
-                            <button>Import</button>
+                            <button>Export</button>
                             </a>
                         </div>
                     </div>
