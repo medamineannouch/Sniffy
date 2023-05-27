@@ -95,6 +95,7 @@
             <div class = "content-box">
                 <table  class='table-hover table-primary' style = 'width: 100%;'>
                     <tr>
+                        <th>Protocol</th>
                         <th>Timestamp</th>
                         <th>Source IPv4</th>
                         <th>Source Port</th>
@@ -123,6 +124,7 @@
                             <td><?php echo $rows[6] ; ?></td>
                             <td><?php echo $rows[7] ; ?></td>
                             <td><?php echo $rows[8] ; ?></td>
+                            <td><?php echo $rows[9] ; ?></td>
 
                         </tr> 
                     <?php }
@@ -139,7 +141,6 @@
                     </p>
 
                 </div>
-            <p><u>Note</u>:- Unsupported packets have been dropped</p>
         </div>
     </main>
     <footer>
