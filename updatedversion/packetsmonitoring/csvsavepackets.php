@@ -3,7 +3,7 @@
     $csvContent = '';
 
     for ($i = 0; $i < count($_SESSION['$CSVRAW']); $i++) {
-        if (($i + 1) % 9 == 0) {
+        if (($i + 1) % 10 == 0) {
             $csvContent .= '"' . $_SESSION['$CSVRAW'][$i] . "\"\n";
         } else {
             $csvContent .= '"' . $_SESSION['$CSVRAW'][$i] . '",';
