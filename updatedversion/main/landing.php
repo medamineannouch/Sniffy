@@ -37,7 +37,7 @@
                      <div class="row">  
                             <div class="col-12">  
                             <nav class="navbar navbar-expand-md navbar-light">  
-                            <a class="navbar-brand" href="index.php" target="_blank">
+                            <a class="navbar-brand" href="http://ensam.um5.ac.ma" target="_blank">
                                 <img src="../imgs/logo_ensamr.jpeg" alt="logo">
                             </a>    
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">  
@@ -54,6 +54,9 @@
                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">  
                                           <a class="nav-link" href="#"> Contact-us </a>  
                                    </li>  
+                                   <li style="margin-left:30px;">
+                                    <a href="../login/logout.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Logout </a>
+                                   </li>
                                    </ul>  
                             </div>  
                             </nav>  
@@ -64,11 +67,6 @@
        </nav>
        <br>
        <br>
-<p><a href="../login/logout.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Logout </a></p>
-
-
-
-
         <div class="container">
             
             <div class="row style ">
@@ -90,8 +88,8 @@
                         <div class="card-body">
                             <h5 class="card-title">Packets tracking</h5>
                             <p class="card-text">Display Packets Statistics In Your Computer</p>
-                            <a href="../packetsmonitoring/monitor.php" role="button" class="btn btn-primary" style="background-color: #8167a9; border-color: #8167a9;">
-                            <button>Track</button>
+                            <a href="../packetsmonitoring/monitor.php" role="button" class="btn btn-primary btn-block" style="background-color: #8167a9; border-color: #8167a9;">
+                            <!-- <button>Track</button> --> Track
                             </a> 
                          </div>
                     </div>
@@ -103,8 +101,8 @@
                         <div class="card-body">
                             <h5 class="card-title">Saved Packets</h5>
                             <p class="card-text">Display Your Saved Packets Statistics</p>
-                            <a href="../packetsmonitoring/savedpackets.php" role="button" class="btn btn-primary" style="background-color: #8167a9; border-color: #8167a9;">
-                            <button>Display</button>
+                            <a href="../packetsmonitoring/savedpackets.php" role="button" class="btn btn-primary btn-block" style="background-color: #8167a9; border-color: #8167a9;">
+                            Display
                             </a>
                         </div>
                     </div>

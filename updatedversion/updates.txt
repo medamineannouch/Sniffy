@@ -1,0 +1,10 @@
+Updates 06/03/2023 (charaf):
+    fixed shape of buttons in pages
+    logo now redirects to ensamr officiel website (on all pages)
+    changed the name of saved file from (saved-packets.cvs) to (<username> packets <dd/mm/yy>.csv)
+    fixed some issues related to links between pages
+    add index.html page to be the first page that shows when entring the website
+
+Todo:
+    page that contains windump and winpcap (.exe) files 
+    any other idea that comes in your mind xD

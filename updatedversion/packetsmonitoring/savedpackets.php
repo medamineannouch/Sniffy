@@ -57,7 +57,7 @@
                             <div class="row">  
                                    <div class="col-12">  
                                           <nav class="navbar navbar-expand-md navbar-light">  
-                                                 <a class="navbar-brand" href="../main/index.php" target="_self" >
+                                                 <a class="navbar-brand" href="http://ensam.um5.ac.ma" target="_blank" >
                                                     <img src="../imgs/logo_ensamr.jpeg" alt="logo">
                                                 </a>    
                                                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">  
@@ -73,6 +73,9 @@
                                                         </li>  
                                                         <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">  
                                                                <a class="nav-link" href="#"> Contact-us </a>  
+                                                        </li>
+                                                        <li style="margin-left:30px;">
+                                                            <a href="../login/logout.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Logout </a>
                                                         </li>  
                                                         </ul>  
                                                  </div>  
@@ -86,15 +89,14 @@
        <main>
 
             <div class = "status-bar">
-                <p class = "status-bar-username">
-                    <?php echo "Logged in as <u>".$_SESSION['username']."</u>"; ?>
+                <p class = "status-bar-username text-center fs-2 text-secondary  mt-3 mb-3  w-100">
+                    <?php echo "History of : <u>".$_SESSION['username']."</u>"; ?>
                 </p>
-                <p><a href="../login/logout.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Logout </a></p>
             </div>
 
             <div class = "content-box">
-                <table  class='table-hover table-primary' style = 'width: 100%;'>
-                    <tr>
+                <table  class='table-hover table-active table-bordered' style = 'width: 100%;text-align:center;'>
+                    <tr class="table-info">
                         <th>Protocol</th>
                         <th>Timestamp</th>
                         <th>Source IPv4</th>

@@ -44,7 +44,7 @@
                             <div class="row">  
                                    <div class="col-12">  
                                           <nav class="navbar navbar-expand-md navbar-light">  
-                                                 <a class="navbar-brand" href="../main/index.php" target="_self" >
+                                                 <a class="navbar-brand" href="http://ensam.um5.ac.ma" target="_target" >
                                                     <img src="../imgs/logo_ensamr.jpeg" alt="logo">
                                                 </a>    
                                                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">  
@@ -60,7 +60,11 @@
                                                         </li>  
                                                         <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">  
                                                                <a class="nav-link" href="#"> Contact-us </a>  
+                                                        </li>
                                                         </li>  
+                                                        <li style="margin-left:30px;">
+                                                            <a href="../login/logout.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Logout </a>
+                                                        </li>
                                                         </ul>  
                                                  </div>  
                                           </nav>  
@@ -72,10 +76,9 @@
        </nav>
        <main>
         <div class = "status-bar">
-            <p class = "status-bar-username">
-                <?php echo "Logged in as <u>".$_SESSION['username']."</u>"; ?>
+            <p class = "status-bar-username text-center fs-2 text-secondary  mt-3 mb-3  w-100">
+                <?php echo "Logged In as <u>".$_SESSION['username']."</u>"; ?>
             </p>
-            <p><a href="../login/logout.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Logout </a></p>
         </div>
         <?php
             $protocol = $_POST['protocol'];
@@ -86,20 +89,23 @@
                     $filter = $_POST['filter'];
                     $packetCount = $_POST['packetCount'];
                    
-                   // $pcapFile = 'C:\wamp64\www\Sniffy\updatedversion\packetsmonitoring\output.pcap'; //charaf
-                   $pcapFile = 'C:\xampp\htdocs\project\Sniffy\V3\packetsmonitoring\output.pcap'; //medamine
+                try {
+                    $pcapFile = 'C:\wamp64\www\Sniffy\updatedversion\packetsmonitoring\output.pcap'; //charaf
+                } catch (\Throwable $th) {
+                    $pcapFile = 'C:\xampp\htdocs\project\Sniffy\V3\packetsmonitoring\output.pcap'; //medamine
+                }
 
                     
                     // Check if running on Windows
                     if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') 
                     {
                         if($filter == "all")
-                            echo "<table class='table-hover' style = 'width: 100%;'>";
+                            echo "<table class='table-hover table-active table-bordered' style = 'width: 100%; text-align:center;'>";
                         else
                             echo "<table>";
                         
                         //Table header
-                        echo "<tr>";
+                        echo "<tr class='table-info'>";
                         echo "<th>Protocol</th>";
 
                         if($filter == "timestamp" || $filter == "all"){
@@ -128,14 +134,14 @@
                         }
                     
                         echo "</tr>";
-
-
-                        // Use the Windows version of tcpdump, which is WinDump
-                        $tcpdump = 'C:\xampp\htdocs\project\Sniffy\V3\packetsmonitoring\windump.exe'; //medamine
-
-           //charaf
-                       // $tcpdump = 'C:\wamp64\www\Sniffy\updatedversion\packetsmonitoring\windump.exe'; //Updated the path to adapt with WampServer
                         
+                        // Use the Windows version of tcpdump, which is WinDump
+                        try {
+                            //charaf
+                            $tcpdump = 'C:\wamp64\www\Sniffy\updatedversion\packetsmonitoring\windump.exe'; //Updated the path to adapt with WampServer
+                        } catch (\Throwable $th) {
+                            // $tcpdump = 'C:\xampp\htdocs\project\Sniffy\V3\packetsmonitoring\windump.exe'; //medamine
+                        }
 
                         //Add packet count
                         
@@ -447,9 +453,9 @@
                         <?php $_SESSION['$CSVRAW'] = $CSVRAW ; ?> 
                         <a href="importmode.php" target="_blank" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Save </a>
                     
-                        <!--I have modified the "retry" so it repeats the process whith the same config -->
+                        <!--I have modified the "retry" so it repeats the process with the same config -->
 
-                        <a href="capturepackets.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Retry </a>
+                        <a href="monitor.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Retry </a>
                     </p>
 
                 </div>

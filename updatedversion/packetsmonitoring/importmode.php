@@ -46,7 +46,7 @@
                      <div class="row">  
                             <div class="col-12">  
                             <nav class="navbar navbar-expand-md navbar-light">  
-                            <a class="navbar-brand" href="../main/index.php" target="_blank">
+                            <a class="navbar-brand" href="http://ensam.um5.ac.ma" target="_blank">
                                 <img src="../imgs/logo_ensamr.jpeg" alt="logo">
                             </a>    
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">  
@@ -63,6 +63,10 @@
                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">  
                                           <a class="nav-link" href="#"> Contact-us </a>  
                                    </li>  
+                                   </li>  
+                                   <li style="margin-left:30px;">
+                                    <a href="../login/logout.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Logout </a>
+                                   </li>
                                    </ul>  
                             </div>  
                             </nav>  
@@ -78,9 +82,7 @@
               if(!empty($importmsg)){
                      echo '<div class="alert alert-success" style="text-align:center;">' .$importmsg . '</div>' ;
               }      
-        ?>
-        <p><a href="../login/logout.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Logout </a></p>
-    
+        ?>    
         <div class="container">
             <div class="row style ">
                 <div class="row">
@@ -100,8 +102,8 @@
                         <div class="card-body">
                             <h5 class="card-title">CSV file</h5>
                             <p class="card-text">Export Data in CSV file format</p>
-                            <a href="csvsavepackets.php" role="button" class="btn btn-primary" style="background-color: #8167a9; border-color: #8167a9;">
-                            <button>Export</button>
+                            <a href="csvsavepackets.php" role="button" class="btn btn-primary btn-block" style="background-color: #8167a9; border-color: #8167a9;">
+                            <!-- <button>Export</button> --> Download
                             </a> 
                          </div>
                     </div>
@@ -113,8 +115,8 @@
                         <div class="card-body">
                             <h5 class="card-title">Database</h5>
                             <p class="card-text">Export Data to the Database</p>
-                            <a href="sqlsavepackets.php" role="button" class="btn btn-primary" style="background-color: #8167a9; border-color: #8167a9;">
-                            <button>Export</button>
+                            <a href="sqlsavepackets.php" role="button" class="btn btn-primary btn-block" style="background-color: #8167a9; border-color: #8167a9;">
+                            <!-- <button>Export</button> --> Export
                             </a>
                         </div>
                     </div>
