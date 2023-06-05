@@ -455,7 +455,7 @@
                     
                         <!--I have modified the "retry" so it repeats the process with the same config -->
 
-                        <a href="monitor.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Retry </a>
+                        <a href="requirements.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Retry </a>
                     </p>
 
                 </div>

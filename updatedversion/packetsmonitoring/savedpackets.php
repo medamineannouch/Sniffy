@@ -138,7 +138,7 @@
             </div>
                 <div>
                     <p>
-                        <a href="monitor.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">New capture</a>
+                        <a href="requirements.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">New capture</a>
                         <a href="dropdata.php" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Drop Data</a>
                     </p>
 

@@ -1,4 +1,4 @@
-Updates 06/03/2023 (charaf):
+Updates 03/06/2023 (charaf):
     fixed shape of buttons in pages
     logo now redirects to ensamr officiel website (on all pages)
     changed the name of saved file from (saved-packets.cvs) to (<username> packets <dd/mm/yy>.csv)
@@ -8,3 +8,8 @@ Updates 06/03/2023 (charaf):
 Todo:
     page that contains windump and winpcap (.exe) files 
     any other idea that comes in your mind xD
+
+Updates 04/06/2023 (charaf):
+    New feature : check the 'username' before inserting informations in Database (Register.php)
+    add requirement page that contains list of necessary files with their links and a tutorial (youtube)
+    adjustd postions of some buttons (logout)

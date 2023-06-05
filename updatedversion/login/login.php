@@ -35,7 +35,7 @@
               
               $conn = new  PDO("mysql:host=$dbHost;dbname=$dbName;port=$dbPort",$dbUser,$dbPass);
               
-              //* insert user in the table 'users'
+              //* check user in the table 'users'
               $authError = null;
               $query = ('SELECT password FROM users WHERE username = ?');
               $request = $conn->prepare($query);

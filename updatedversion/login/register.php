@@ -44,14 +44,34 @@
                      $username = null;
                      $email = null;
                      $password = null;
+                     //! the returned message if an error occured in authentification
+                     $authError = null;
+
                      //* processing the data posted by the form
                      if($_SERVER['REQUEST_METHOD'] == 'POST'){
                             $username = $_POST['username'];
                             $email = $_POST['mail'];
                             $password = $_POST['password'];
+                            
+                            //* Connect to Database "sniffy"
+                            $dbHost = "localhost";
+                            $dbUser = "root";
+                            $dbPass = "";
+                            $dbName = "sniffy";
+                            $dbPort = 3306;
+                            
+                            $conn = new  PDO("mysql:host=$dbHost;dbname=$dbName;port=$dbPort",$dbUser,$dbPass);
+
+
+                            //* ensure the unicity of username in database
+                            $query = ('SELECT username FROM users WHERE username = ?');
+                            $request = $conn->prepare($query);
+                            $request->execute(array($username));
+                            $extractedUser= $request->fetch(); //? returns false if the user doesn't exist
+
                             if(empty($_POST['agree'])){
                                    $checkError = "* This option is required !" ;          
-                            } 
+                            }
                             //* check email format (Regular Expression)
                             elseif(!preg_match("/^([a-zA-Z0-9]{1,})@(gmail|email|hotmail|outlook|um5)\.[a-zA-z]{2,}/",$email)){
                                    $mailError = "Invalid mail format !";
@@ -65,17 +85,13 @@
                                    //* after posting the check input will be checked if the page is not redirected to login.php    
                                    $checkval = "checked"; 
                             }
+                            //* if the user already exists show error
+                            elseif($extractedUser !== false){
+                                   $authError = "Username already exists ! ";
+                                   $checkval = "checked"; 
+
+                            }
                             else{ 
-                                                                       
-                                   
-                                   //* Connect to Database "sniffy"
-                                   $dbHost = "localhost";
-                                   $dbUser = "root";
-                                   $dbPass = "";
-                                   $dbName = "sniffy";
-                                   $dbPort = 3306;
-                                   
-                                   $conn = new  PDO("mysql:host=$dbHost;dbname=$dbName;port=$dbPort",$dbUser,$dbPass);
                                    
                                    //* insert user in the table 'users'
                                    $query = ('INSERT INTO users(username,password) VALUES(?,?)');
@@ -89,7 +105,12 @@
                      }
                      
               ?>
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post"> <!--   //* "htmlspecialchars($_SERVER['PHP_SELF'])":eviter les attacks XSS (cross site scripting)-->
+       
+              <?php
+                     if($authError != null)
+                            echo  "<div class='alert alert-danger' style='text-align:center;'> $authError </div> ";
+              ?>
+       <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post"> <!--   //* "htmlspecialchars($_SERVER['PHP_SELF'])":eviter les attacks XSS (cross site scripting)-->
         <h1>Sign Up</h1>
         <div>
             <label for="username">Username:</label>
