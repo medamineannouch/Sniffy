@@ -94,9 +94,9 @@
                             else{ 
                                    
                                    //* insert user in the table 'users'
-                                   $query = ('INSERT INTO users(username,password) VALUES(?,?)');
+                                   $query = ('INSERT INTO users(username,password,email) VALUES(?,?,?)');
                                    $request = $conn->prepare($query);
-                                   $request->execute(array($username,$password));
+                                   $request->execute(array($username,$password,$email));
                                    
                                    //* reairect to login.php with filled fields 
                                    $_SESSION['registered'] = true;
