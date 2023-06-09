@@ -35,6 +35,8 @@
         <link rel="stylesheet" href="../style/header.css">
        <link rel="stylesheet" href="../style/footer.css">
        <link rel="stylesheet" href="../style/register.css">
+               <script src="https://unpkg.com/chart.js"></script>
+
     </head>
     
     <body>
@@ -88,7 +90,11 @@
                 <?php
                     $filter = $_POST['filter'];
                     $packetCount = $_POST['packetCount'];
-                   
+            
+                   //get ip address
+                        $hostname = gethostname();
+                        $ipAddress = gethostbyname($hostname);
+            
                 try {
                     $pcapFile = 'C:\wamp64\www\Sniffy\updatedversion\packetsmonitoring\output.pcap'; //charaf
                 } catch (\Throwable $th) {
@@ -235,11 +241,30 @@
                             }
                             
                             echo "</tr>";  
+                            
+                            // Vérifiez si l'adresse IP source correspond à l'adresse IP spécifique 
+                            if ($sourceIP == $ipAddress ) {
+                                $direction = 'sent'; // Paquet émis
+                            } else {
+                                $direction = 'received'; // Paquet reçu
+                            }
+
+                            if ($direction == 'sent') {
+                                $sentPacketSizes[] = $packetLength;
+                                $sentTimestamps[] = $dateString;
+                            } elseif ($direction == 'received') {
+                                $receivedPacketSizes[] = $packetLength;
+                                $receivedTimestamps[] = $dateString;
+                            }
                             //! if the save buttion is pressed || TODO fix the Timestamp from the PcapFile
                             //timestamp is fixed !!
                             array_push($CSVRAW,$_SESSION['username'],$protocol,$dateString,$sourceIP,$sourcePort,$destinationIP,$destinationPort,$sourceMAC,$destinationMAC,$packetLength); 
                         }
-
+                        $sentPacketSizesJson = json_encode($sentPacketSizes);
+                        $sentTimestampsJson = json_encode($sentTimestamps);
+                        $receivedPacketSizesJson = json_encode($receivedPacketSizes);
+                        $receivedTimestampsJson = json_encode($receivedTimestamps);
+                        
                         // Close the PCAP file
                         fclose($fileHandle);
 
@@ -249,206 +274,17 @@
 
                         //close table
                         echo "</table>";
-                    }
-
-                    elseif (strtoupper(PHP_OS) === 'LINUX')
-                    {
-                            if($filter == "all")
-                            echo "<table style = 'width: 100%;'>";
-                            else
-                                echo "<table>";
-                            
-                            //Table header
-                            echo "<tr>";
-                            echo "<th>Protocol</th>";
-
-                            if($filter == "timestamp" || $filter == "all"){
-                                echo "<th>Timestamp</th>";
-                            }
-                            if($filter == "sourceIP" || $filter == "all"){
-                                echo "<th>Source IPv4</th>";
-                            }
-                            if($filter == "sourcePort" || $filter == "all"){
-                                echo "<th>Source Port</th>";
-                            }
-                            if($filter == "destinationIP" || $filter == "all"){
-                                echo "<th>Destination IPv4</th>";
-                            }
-                            if($filter == "destinationPort" || $filter == "all"){
-                                echo "<th>Destination Port</th>";
-                            }
-                            if($filter == "sourceMAC" || $filter == "all"){
-                                echo "<th>Source MAC</th>";
-                            }
-                            if($filter == "destinationMAC" || $filter == "all"){
-                                echo "<th>Destination MAC</th>";
-                            }
-                            if($filter == "packetLength" || $filter == "all"){
-                                echo "<th>Packet length</th>";
-                            }
-                        
-                            echo "</tr>";
-                            //Command to read packets and store them in a .pcap file
-                            $cmd = "sudo tcpdump -i eth0 -w ".$pcapFile;
-                            //Add packet count
-                            $cmd = $cmd . " -c " . $packetCount;
-                            //Decide which protocol to filter out
-                            $cmd = $cmd . " " . $protocol;
-                            //Execute command on shell
-                            echo shell_exec($cmd);
-
-                            //Commands specific for TCP packets
-                            if($protocol == "tcp"){
-                                exec($cmd . " | cut -d ' ' -f 1", $timestamp, $returnVal);
-                                exec($cmd . " | cut -d ' ' -f 3 | cut -d '.' -f 1,2,3,4", $sourceIP, $returnVal);
-                                exec($cmd . " | cut -d ' ' -f 3 | cut -d '.' -f 5", $sourcePort, $returnVal);
-                                exec($cmd . " | cut -d ' ' -f 5 | cut -d '.' -f 1,2,3,4", $destinationIP, $returnVal);
-                                exec($cmd . " | cut -d ' ' -f 5 | cut -d '.' -f 5 | cut -d ':' -f 1", $destinationPort, $returnVal);
-                                exec($cmd . " -e | cut -d ' ' -f 2", $sourceMAC, $returnVal);
-                                exec($cmd . " -e | cut -d ' ' -f 4 | cut -d ',' -f 1", $destinationMAC, $returnVal);
-                                exec($cmd . " | awk '{print $(NF)}'", $packetLength, $returnVal);
-                                exec($cmd . " | grep -v 'IP6' | cut -d ' ' -f 6- | rev | cut -d ' ' -f 1,2 --complement | cut -c 1 --complement | rev", $info, $returnVal);
-                                for($i = 0; $i < sizeof($timestamp); $i += 1)
-                                {
-                                    echo "<tr>";
-                                    echo "<td>".$protocol."\n</td>";
-
-                                    if($filter == "timestamp" || $filter == "all"){
-                                        echo "<td>".$timestamp[$i]."\n</td>";
-                                    }
-                                    if($filter == "sourceIP" || $filter == "all"){
-                                        echo "<td>".$sourceIP[$i]."\n</td>";
-                                    }
-                                    if($filter == "sourcePort" || $filter == "all"){
-                                        echo "<td>".$sourcePort[$i]."\n</td>";
-                                    }
-                                    if($filter == "destinationIP" || $filter == "all"){
-                                        echo "<td>".$destinationIP[$i]."\n</td>";
-                                    }
-                                    if($filter == "destinationPort" || $filter == "all"){
-                                        echo "<td>".$destinationPort[$i]."\n</td>";
-                                    }
-                                    if($filter == "sourceMAC" || $filter == "all"){
-                                        echo "<td>".$sourceMAC[$i]."\n</td>";
-                                    }
-                                    if($filter == "destinationMAC" || $filter == "all"){
-                                        echo "<td>".$destinationMAC[$i]."\n</td>";
-                                    }
-                                    if($filter == "packetLength" || $filter == "all"){
-                                        echo "<td>".$packetLength[$i]."\n</td>";
-                                    }
-                                    if($filter == "all"){
-                                        echo "<td>".$info[$i]."\n</td>";
-                                    }
-                                    echo "</tr>";
-                                }
-                            }
-                        //Commands specific for UDP packets
-                        else if($protocol == "udp")
-                            {
-                                exec($cmd . " | grep 'UDP' |grep -v 'NBT' | cut -d ' ' -f 1", $timestamp, $returnVal);
-                                exec($cmd . " | grep 'UDP' | grep -v 'NBT' | cut -d ' ' -f 3 | cut -d '.' -f 1,2,3,4", $sourceIP, $returnVal);
-                                exec($cmd . " | grep 'UDP' | grep -v 'NBT' | cut -d ' ' -f 3 | cut -d '.' -f 5", $sourcePort, $returnVal);
-                                exec($cmd . " | grep 'UDP' | grep -v 'NBT' | cut -d ' ' -f 5 | cut -d '.' -f 1,2,3,4", $destinationIP, $returnVal);
-                                exec($cmd . " | grep 'UDP' | grep -v 'NBT' | cut -d ' ' -f 5 | cut -d '.' -f 5 | cut -d ':' -f 1", $destinationPort, $returnVal);
-                                exec($cmd . " -e | grep 'UDP' | grep -v 'NBT' | cut -d ' ' -f 2", $sourceMAC, $returnVal);
-                                exec($cmd . " -e | grep 'UDP' | grep -v 'NBT' | cut -d ' ' -f 4 | cut -d ',' -f 1", $destinationMAC, $returnVal);
-                                exec($cmd . " | grep 'UDP' | grep -v 'NBT' | awk '{print $(NF)}'", $packetLength, $returnVal);
-                                exec($cmd . " | grep 'UDP' | grep -v 'NBT' | cut -d ' ' -f 6- | rev | cut -d ' ' -f 1,2 --complement | cut -c 1 --complement | rev", $info, $returnVal);
-                                for($i = 0; $i < sizeof($timestamp); $i += 1)
-                                {
-                                    echo "<tr>";
-                                    echo "<td>".$protocol."\n</td>";
-
-                                    if($filter == "timestamp" || $filter == "all"){
-                                        echo "<td>".$timestamp[$i]."\n</td>";
-                                    }
-                                    if($filter == "sourceIP" || $filter == "all"){
-                                        echo "<td>".$sourceIP[$i]."\n</td>";
-                                    }
-                                    if($filter == "sourcePort" || $filter == "all"){
-                                        echo "<td>".$sourcePort[$i]."\n</td>";
-                                    }
-                                    if($filter == "destinationIP" || $filter == "all"){
-                                        echo "<td>".$destinationIP[$i]."\n</td>";
-                                    }
-                                    if($filter == "destinationPort" || $filter == "all"){
-                                        echo "<td>".$destinationPort[$i]."\n</td>";
-                                    }
-                                    if($filter == "sourceMAC" || $filter == "all"){
-                                        echo "<td>".$sourceMAC[$i]."\n</td>";
-                                    }
-                                    if($filter == "destinationMAC" || $filter == "all"){
-                                        echo "<td>".$destinationMAC[$i]."\n</td>";
-                                    }
-                                    if($filter == "packetLength" || $filter == "all"){
-                                        echo "<td>".$packetLength[$i]."\n</td>";
-                                    }
-                                    if($filter == "all"){
-                                        echo "<td>".$info[$i]."\n</td>";
-                                    }
-                                    echo "</tr>";
-                                }
-                            }
-
-                        //Commands specific for UDP packets
-                        else if($protocol == "icmp")
-                        {
-                            exec($cmd . " | grep 'UDP' |grep -v 'NBT' | cut -d ' ' -f 1", $timestamp, $returnVal);
-                            exec($cmd . " | grep 'UDP' | grep -v 'NBT' | cut -d ' ' -f 3 | cut -d '.' -f 1,2,3,4", $sourceIP, $returnVal);
-                            exec($cmd . " | grep 'UDP' | grep -v 'NBT' | cut -d ' ' -f 3 | cut -d '.' -f 5", $sourcePort, $returnVal);
-                            exec($cmd . " | grep 'UDP' | grep -v 'NBT' | cut -d ' ' -f 5 | cut -d '.' -f 1,2,3,4", $destinationIP, $returnVal);
-                            exec($cmd . " | grep 'UDP' | grep -v 'NBT' | cut -d ' ' -f 5 | cut -d '.' -f 5 | cut -d ':' -f 1", $destinationPort, $returnVal);
-                            exec($cmd . " -e | grep 'UDP' | grep -v 'NBT' | cut -d ' ' -f 2", $sourceMAC, $returnVal);
-                            exec($cmd . " -e | grep 'UDP' | grep -v 'NBT' | cut -d ' ' -f 4 | cut -d ',' -f 1", $destinationMAC, $returnVal);
-                            exec($cmd . " | grep 'UDP' | grep -v 'NBT' | awk '{print $(NF)}'", $packetLength, $returnVal);
-                            exec($cmd . " | grep 'UDP' | grep -v 'NBT' | cut -d ' ' -f 6- | rev | cut -d ' ' -f 1,2 --complement | cut -c 1 --complement | rev", $info, $returnVal);
-                            for($i = 0; $i < sizeof($timestamp); $i += 1)
-                            {
-                                echo "<tr>";
-                                echo "<td>".$protocol."\n</td>";
-
-                                if($filter == "timestamp" || $filter == "all"){
-                                    echo "<td>".$timestamp[$i]."\n</td>";
-                                }
-                                if($filter == "sourceIP" || $filter == "all"){
-                                    echo "<td>".$sourceIP[$i]."\n</td>";
-                                }
-                                if($filter == "sourcePort" || $filter == "all"){
-                                    echo "<td>".$sourcePort[$i]."\n</td>";
-                                }
-                                if($filter == "destinationIP" || $filter == "all"){
-                                    echo "<td>".$destinationIP[$i]."\n</td>";
-                                }
-                                if($filter == "destinationPort" || $filter == "all"){
-                                    echo "<td>".$destinationPort[$i]."\n</td>";
-                                }
-                                if($filter == "sourceMAC" || $filter == "all"){
-                                    echo "<td>".$sourceMAC[$i]."\n</td>";
-                                }
-                                if($filter == "destinationMAC" || $filter == "all"){
-                                    echo "<td>".$destinationMAC[$i]."\n</td>";
-                                }
-                                if($filter == "packetLength" || $filter == "all"){
-                                    echo "<td>".$packetLength[$i]."\n</td>";
-                                }
-                                if($filter == "all"){
-                                    echo "<td>".$info[$i]."\n</td>";
-                                }
-                                echo "</tr>";
-                            }
-                        }
+                    
                     }
                 ?>
 
-                <div>
-                    <!--
-                    to do
-                    waaaaaaaaaaaaaa 
-                    charaf 
-                    -->
-                    <!-- //? that will be Painful bruh but Here we Gooooooooooo! -->
-                    <!--indeed it iiis-->
+               
+            <p><u>Note</u>:- Unsupported packets have been dropped</p>
+        </div>
+           <canvas id="sentPacketsChart"></canvas>
+        <canvas id="receivedPacketsChart"></canvas>
+        <div>
+                    
                     <p>
                         <?php $_SESSION['$CSVRAW'] = $CSVRAW ; ?> 
                         <a href="importmode.php" target="_blank" role="button" class="btn btn-primary " style="background-color: #8167a9; border-color: #8167a9; ">Save </a>
@@ -459,9 +295,64 @@
                     </p>
 
                 </div>
-            <p><u>Note</u>:- Unsupported packets have been dropped</p>
-        </div>
         </main>
+    <script>
+    var sentpacketSizes = <?php echo $sentPacketSizesJson; ?>;
+    var senttimestamps = <?php echo $sentTimestampsJson; ?>;
+
+    // Créer le graphique à barres avec Chart.js
+    var ctx = document.getElementById('sentPacketsChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: senttimestamps,
+            datasets: [{
+                label: 'Taille des paquets envoyés',
+                data: sentpacketSizes,
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+
+
+    /////////////////////
+
+    var recpacketSizes = <?php echo $receivedPacketSizesJson; ?>;
+    var rectimestamps = <?php echo $receivedTimestampsJson; ?>;
+
+    // Créer le graphique à barres avec Chart.js
+    var ctx = document.getElementById('receivedPacketsChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: rectimestamps,
+            datasets: [{
+                label: 'Taille des paquets reçus',
+                data: recpacketSizes,
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
         <footer>
 <section id="footer">  
 <div class="container">  
